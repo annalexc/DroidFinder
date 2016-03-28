@@ -1,0 +1,126 @@
+@import url(https://fonts.googleapis.com/css?family=Arvo);
+
+html, body { 
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  background-color: burlywood;
+  font-family: 'Arvo';
+}
+
+*, *::before, *::after { box-sizing: inherit; }
+
+footer {
+  position: fixed; 
+  min-width: 600px;
+  bottom: 0px;
+  width: 680px; 
+  height: 120px; 
+  background-color: burlywood;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.35em 0;
+}  
+
+#landing {
+  width: 680px;
+  margin: 0 auto;
+  position: relative;
+  background-color: transparent;
+}
+
+#play-area {
+  height: 100%;
+  width: 100%;
+}
+
+.code {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+	height: 8%;
+  padding: 0.35em 0;
+}
+.round {
+  display: inline-block;
+  color: snow;
+  vertical-align: middle;
+  text-align: center;
+  width: 8%;
+  height: 100%;
+  padding: 0;
+  border: 1px solid snow;
+}
+
+.element {
+  display: inline-block;
+  vertical-align: middle;
+  width: 10.47%;
+  padding-bottom: 9%;
+  background-color: darkgray;
+  border-radius: 50%;
+  border: 5px solid snow;
+}
+.result {
+  display: inline-block;
+  vertical-align: middle;
+  width: 29%;
+  color: white;
+  height: 100%;
+  padding: 0;
+  border:1px solid snow;
+}
+
+
+.droid {
+  display: inline-block;
+  vertical-align: middle;
+  width: 12.96%;
+  height: 81%;
+  margin: 0 5px;;
+  background-color: darkgray;
+  border-radius: 50%;
+  border: 5px solid snow;
+}
+
+/**********************************
+FUN EFFECTS WITH SELECTABLE DROIDS
+***********************************/
+
+@keyframes wiggle {
+  0% { transform: rotateZ(5deg); }
+  50% { transform: rotateZ(-5deg); }
+  100% { transform: rotateZ(5deg); }
+}
+
+.droid:hover { 
+  animation: wiggle 0.25s ease infinite;
+
+}
+
+.droid:hover::after {
+  content:" ";
+  width:100%;
+  height:100%;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+
+
+
+
+
+
+/*
+.hidden {
+  display: none;
+}*/
