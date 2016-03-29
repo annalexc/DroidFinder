@@ -22,25 +22,37 @@ h1 {
   font-size: 4em;
 }
 
+h2 {
+  font: 5em 'Quicksand';
+  color: white;
+}
+
 header {
   margin: 0 auto;
   text-align: center;
+  margin-bottom: 50px;
 }
+
 footer {
   position: fixed;
-  bottom: 0px;
+  bottom: 10px;
   width: 780px; 
   height: 120px; 
-  background-color: peru;
+  background-color: rgb(155,128,94);
   display: flex;
+  border-top: 2px solid rgb(111,92,67);
   justify-content: space-around;
   align-items: center;
   padding: 0.35em 0;
   margin: 20px 0;
-  border-radius: 50% / 10.75%;
+  border-radius: 50% / 12.75%;
   color: white;
   text-align: center;
   text-indent: .1em;
+
+  /*-webkit-box-shadow: 0px 6px 33px 6px rgba(133,131,133,0.76);
+  -moz-box-shadow: 0px 6px 33px 6px rgba(133,131,133,0.76);*/
+
 }
 
 footer::after {
@@ -51,9 +63,36 @@ footer::after {
   right: -5%;
   left: -5%;
   background: inherit;
-  border-radius: 4.8% / 50%;
-  z-index: -1
+  border-radius: 5% / 49%;
+  border-left: 2px solid rgb(111,92,67);
+  border-right: 2px solid rgb(111,92,67);
+  z-index: -1;
+  box-shadow: 0px 12px 0 rgb(111,92,67);
+  /*background-image: linear-gradient(-45deg, black 25%, transparent 25%, transparent 50%, black 50%, black 75%, transparent 75%, transparent);*/
+  background-size: 4px 4px;
 }  
+
+.message {
+  opacity: 0;
+}
+
+.overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  position: fixed;
+  text-align: center;
+  background-color: rgba(0,0,0,0.5); 
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0 100px;
+  opacity: 1;
+  top: 0;
+  left: 0;
+}
+
 
 #landing {
   width: 780px;
@@ -63,9 +102,12 @@ footer::after {
 }
 
 #play-area {
+  display: flex;
   height: 100%;
   width: 100%;
-  margin-bottom: 125px;
+  flex-direction: column-reverse;
+  margin-bottom: 150px;
+  overflow: auto;
 }
 
 .code {
@@ -77,10 +119,9 @@ footer::after {
   padding: 0.35em 0;
 }
 .round {
-  display: inline-block;
   color: rgba(177,147,108,0.75);
   text-shadow: 1px 1.5px 1.5px rgba(255,255,255,0.3);
-  font-size: 2.75em;
+  font-size: 4em;
   vertical-align: middle;
   text-align: center;
   width: 8%;
@@ -96,7 +137,6 @@ footer::after {
   background-color: rgb(199,165,121);
   box-shadow: 1.75px 1.75px 1.75px rgba(255,255,255,0.3);
   border-radius: 50%;
-  /*border: 5px solid snow;*/
 }
 
 .element:hover {
@@ -106,7 +146,7 @@ footer::after {
 .result {
   display: flex;
   flex-wrap: wrap;
-  display: inline-block;
+  align-content: center;
   vertical-align: middle;
   width: 29%;
   color: white;
@@ -134,13 +174,13 @@ FUN EFFECTS WITH SELECTABLE DROIDS
 ***********************************/
 
 @keyframes wiggle {
-  0% { transform: rotateZ(5deg); }
-  50% { transform: rotateZ(-5deg); }
-  100% { transform: rotateZ(5deg); }
+  0% { transform: rotateZ(7deg); }
+  50% { transform: rotateZ(-7deg); }
+  100% { transform: rotateZ(7deg); }
 }
 
 .droid:hover { 
-  animation: wiggle 0.25s ease infinite;
+  animation: wiggle 0.15s ease infinite;
 
 }
 
@@ -156,8 +196,46 @@ FUN EFFECTS WITH SELECTABLE DROIDS
 }
 
 
-/*.hidden {
+.hidden {
   display: none;
-}*/
+}
+
+
+
+
+
+button {
+  margin: 0 auto;
+  background-color: rgb(155,128,94);
+  border-radius: 2em;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  font: 0.45em 'Arvo';
+  padding: 7px;
+  text-decoration:none;
+  box-shadow:0px 5px 0px rgb(111,92,67);
+  outline: none;
+}
+
+
+button#restart {
+  background-color: rgb(155,128,94);
+  width: 25%;
+  border-radius: 0.25em;
+  cursor: pointer;
+  color: white;
+  font: 3em 'Arvo';
+}
+
+
+button:hover, button#restart:hover {
+  background-color: rgb(88,73,54);
+}
+
+button:active, button#restart:active {
+  position:relative;
+  top:1px;
+}
 
 
