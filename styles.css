@@ -1,6 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Arvo);
 @import url(https://fonts.googleapis.com/css?family=Quicksand:700,400);
 
+/**********************************
+IMPORTANT DEFAULTS
+***********************************/
+
 html, body { 
   box-sizing: border-box;
   height: 100%;
@@ -28,14 +32,13 @@ h2 {
 }
 
 header {
-  margin: 0 auto;
+  margin: 30px auto;
   text-align: center;
-  margin-bottom: 50px;
 }
 
-footer {
+#droid-home {
   position: fixed;
-  bottom: 10px;
+  top: 120px;
   width: 780px; 
   height: 120px; 
   background-color: rgb(155,128,94);
@@ -49,13 +52,9 @@ footer {
   color: white;
   text-align: center;
   text-indent: .1em;
-
-  /*-webkit-box-shadow: 0px 6px 33px 6px rgba(133,131,133,0.76);
-  -moz-box-shadow: 0px 6px 33px 6px rgba(133,131,133,0.76);*/
-
 }
 
-footer::after {
+#droid-home::after {
   content: '';
   position: absolute;
   top: 10%;
@@ -68,7 +67,6 @@ footer::after {
   border-right: 2px solid rgb(111,92,67);
   z-index: -1;
   box-shadow: 0px 12px 0 rgb(111,92,67);
-  /*background-image: linear-gradient(-45deg, black 25%, transparent 25%, transparent 50%, black 50%, black 75%, transparent 75%, transparent);*/
   background-size: 4px 4px;
 }  
 
@@ -83,10 +81,9 @@ footer::after {
   align-content: center;
   position: fixed;
   text-align: center;
-  background-color: rgba(0,0,0,0.5); 
+  background-color: rgba(0,0,0,0.75); 
   height: 100%;
   width: 100%;
-  margin: 0;
   padding: 0 100px;
   opacity: 1;
   top: 0;
@@ -96,6 +93,7 @@ footer::after {
 
 #landing {
   width: 780px;
+  padding-top: 150px;
   margin: 0 auto;
   position: relative;
   background-color: transparent;
@@ -118,6 +116,7 @@ footer::after {
 	height: 8%;
   padding: 0.35em 0;
 }
+
 .round {
   color: rgba(177,147,108,0.75);
   text-shadow: 1px 1.5px 1.5px rgba(255,255,255,0.3);
@@ -167,7 +166,9 @@ footer::after {
   border: 5px solid snow;
 }
 
-
+.hidden {
+  display: none;
+}
 
 /**********************************
 FUN EFFECTS WITH SELECTABLE DROIDS
@@ -195,13 +196,9 @@ FUN EFFECTS WITH SELECTABLE DROIDS
   left: 0;
 }
 
-
-.hidden {
-  display: none;
-}
-
-
-
+/**********************************
+    FUN EFFECTS WITH BUTTONS
+***********************************/
 
 
 button {
@@ -217,7 +214,6 @@ button {
   box-shadow:0px 5px 0px rgb(111,92,67);
   outline: none;
 }
-
 
 button#restart {
   background-color: rgb(155,128,94);

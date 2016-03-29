@@ -17,24 +17,24 @@ droidSearch.droidsAll = {
 	4: 	{	name: "Wall-E",
 		 	url: "https://cdn2.iconfinder.com/data/icons/walle/256/my_computer.png"
 		},
-	5: 	{	name: "TARS",
-		 	url: ""
+	5: 	{	name: "Rosie",
+		 	url: "https://carsonspeight.files.wordpress.com/2011/08/the_jetsons_by_jaimemolina.png"
 		},
 	6: 	{	name: "EVE",
 		 	url: "http://vignette2.wikia.nocookie.net/pixar/images/c/ca/Eve_wall%E2%80%A2e_clipped_rev_1.png"
 		},
 	7: 	{	name: "Baymax",
-		 	url: ""
+		 	url: "http://vignette2.wikia.nocookie.net/smashbroslawlorigins/images/f/f8/Baymax.png"
 		},		
-	8: 	{	name: "Iron-Giant",
-		 	url: ""
+	8: 	{	name: "Android",
+		 	url: "https://thecustomizewindows.com/wp-content/uploads/2011/11/Nicest-Android-Live-Wallpapers.png"
 		},	
 	}
 
 droidSearch.droidDragKey;	// This holds the "key" of the droid being dragged to a peg element
-droidSearch.codeLength;	// Length of code to be broken
-droidSearch.numRounds;	// Number of numRounds  
-droidSearch.numDroids;	// Number of selectable droids
+droidSearch.codeLength;		// Length of code to be broken
+droidSearch.numRounds;		// Number of numRounds  
+droidSearch.numDroids;		// Number of selectable droids
 droidSearch.selectableDroids = {};
 droidSearch.answer = [];
 droidSearch.playerGuess = [];
@@ -68,10 +68,12 @@ droidSearch.setSelectableDroids = function(){
 	var i = this.numDroids;
 	var j;
 	while (i--) {
-		j=Math.floor(Math.random()*(i+1));
+		j=Math.floor(Math.random()*(droidsInit.length));
 		this.selectableDroids.push(droidsInit[j]);
 		droidsInit.splice(j,1);
+
 	};
+	this.setAnswerCode();
 };
 
 // Set random combination of droids for FINAL ANSWER CODE for player to decode, based on selectable droids.
@@ -81,7 +83,7 @@ droidSearch.setAnswerCode = function(){
 	var i = this.codeLength;
 	var j;
 	while (i--) {
-		j=Math.floor(Math.random()*(i+1));
+		j=Math.floor(Math.random()*(droidsInit.length));
 		this.answer.push(droidsInit[j]);
 		droidsInit.splice(j,1);
 	};
@@ -140,7 +142,7 @@ droidSearch.renderGameBoard = function(){
 
 // ***RENDER SELECTABLE DROIDS AREA***
 droidSearch.renderSelectableDroids = function(){
-	var $footer = $('<footer>');
+	var $droidHome = $('<div id="droid-home">');
 	for (var i = 0; i < this.selectableDroids.length; i++){ 
 		var $droid = $('<li class=droid draggable="true">');
 		var key = this.droidsAll[this.selectableDroids[i]];
@@ -153,14 +155,10 @@ droidSearch.renderSelectableDroids = function(){
 		} else if (this.numDroids === 6){ $droid.css("height","91.98%");
 		} else if (this.numDroids === 4){ $droid.css("height","92.9%");
 		};
-		$footer.append($droid);		
+		$droidHome.append($droid);		
 	};
-	$('#landing').append($footer);
+	$('#landing').append($droidHome);
 };
-
-
-
-// ***RENDER CODE SUBMISSION AREA***
 
 
 // ***RENDER SUBMISSION RESULT***
@@ -181,7 +179,6 @@ droidSearch.printGuessResult = function(round,roundResult){
 };
 
 
-
 // ****DRAG HANDLER***
 // Listens for mousedown events on a SELECTABLE DROID, and stores the key value of that droid as the global variable droidDragKey
 droidSearch.setDragHandler = function() {
@@ -197,7 +194,7 @@ $('.droid').on('mousedown', function(evt){
 droidSearch.setDropHandler = function(){
 	var scope = this;
 
-	$('.element').on('drop', function(e){
+	$('.code.active li.element').on('drop', function(e){
 		e.preventDefault();
         e.stopPropagation();
         $(this).css({
@@ -207,7 +204,7 @@ droidSearch.setDropHandler = function(){
 		$(this).val(scope.droidDragKey);
     });
 	
-	$('.element').on('dragover',function(e){
+	$('.code.active li.element').on('dragover',function(e){
     	e.preventDefault();
         e.stopPropagation();
 	});		
@@ -245,27 +242,30 @@ droidSearch.displayNextRound = function(round){
 	} else {
 	var $currentRound = $('.code[value='+round+']');
 	var $nextRound = $('.code[value='+(round+1)+']');
-	$currentRound.toggleClass('inactive');
-	$nextRound.toggleClass('hidden');
+	$currentRound.toggleClass('active');
+	$nextRound.toggleClass('hidden').toggleClass('active');
+
 	};
+	this.setDropHandler();
 };
 
-
-
-
+// *** CHECK & DISPLAY WIN ***
+// Check for a win condition and display the appropriate status
 droidSearch.checkDisplayWinStatus = function(roundResult){
 	if(roundResult[0] == this.codeLength) {
 		$('.message').toggleClass('overlay');
 		$('h2').text('YOU WIN!');
 		return true;
 	};
-
 };
 
+
+// *** CHECK & DISPLAY LOSS ***
+// Check for a lose condition and display the appropriate status
 droidSearch.checkDisplayLoseStatus = function(round){
 	if(round == this.numRounds) {
 		$('.message').toggleClass('overlay');
-		$('h2').text(":( These are NOT the droids I'm looking for...");
+		$('h2').text("Yikes :( These are NOT the droids I'm looking for...");
 		return true;
 	};
 };
@@ -276,9 +276,8 @@ droidSearch.init = function(){
 	$('#landing').empty();
 	this.parseDifficulty(0);
 	this.setSelectableDroids();
-	this.setAnswerCode();
 	this.renderGameBoard();
-	$('li.code[value=1]').toggleClass('hidden'); // Display the first round!!
+	$('li.code[value=1]').toggleClass('hidden').toggleClass('active'); // Display the first round!!
 	this.renderSelectableDroids();
 	this.setDragHandler();
 	this.setDropHandler();
