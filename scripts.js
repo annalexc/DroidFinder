@@ -21,7 +21,7 @@ droidSearch.droidsAll = {
 		 	url: "https://carsonspeight.files.wordpress.com/2011/08/the_jetsons_by_jaimemolina.png"
 		},
 	6: 	{	name: "EVE",
-		 	url: "http://vignette2.wikia.nocookie.net/pixar/images/c/ca/Eve_wall%E2%80%A2e_clipped_rev_1.png"
+		 	url: "img/eve.png"
 		},
 	7: 	{	name: "Baymax",
 		 	url: "http://vignette2.wikia.nocookie.net/smashbroslawlorigins/images/f/f8/Baymax.png"
@@ -30,7 +30,6 @@ droidSearch.droidsAll = {
 		 	url: "https://thecustomizewindows.com/wp-content/uploads/2011/11/Nicest-Android-Live-Wallpapers.png"
 		},	
 	}
-
 droidSearch.droidDragKey;	// This holds the "key" of the droid being dragged to a peg element
 droidSearch.codeLength;		// Length of code to be broken
 droidSearch.numRounds;		// Number of numRounds  
@@ -38,22 +37,22 @@ droidSearch.numDroids;		// Number of selectable droids
 droidSearch.selectableDroids = {};
 droidSearch.answer = [];
 droidSearch.playerGuess = [];
-
+droidSearch.level = 0; // Num that represents difficulty of game. 0: Easy, 1: Medium, 2:Hard
 
 // ***PARSE DIFFICULTY MODE***
-droidSearch.parseDifficulty = function(difficulty){
-	switch(difficulty){
-		case 0: 
+droidSearch.parseDifficulty = function(level){
+	switch(level){
+		case 1: 
 			this.codeLength = 4;
 			this.numDroids = 4;
-			this.numRounds = 4;
+			this.numRounds = 2;
 			break;
-		case 1: 
+		case 2: 
 			this.codeLength = 4;
 			this.numDroids = 6;
 			this.numRounds = 10;
 			break;
-		case 2: 
+		case 3: 
 			this.codeLength = 5;
 			this.numDroids = 8;
 			this.numRounds = 12;
@@ -93,9 +92,7 @@ droidSearch.setAnswerCode = function(){
 droidSearch.validateGuess = function(playerGuess){
 	// Reset Round Result Summary (For now... [Correct, Nearly Correct, Wrong])
 	
-	var roundResult = [0,0,0]; 
-	// console.log("Player guess is: " + playerGuess);
-	// console.log("Answer is: "+ this.answer);
+	var roundResult = [0,0,0];
 
 	// Check for droid presence && correct droid placement
 	for (i = 0; i < playerGuess.length; i++){		
@@ -118,7 +115,7 @@ droidSearch.validateGuess = function(playerGuess){
 
 
 // ***RENDER GAME BOARD BASED ON DIFFICULTY***
-droidSearch.renderGameBoard = function(){
+droidSearch.renderGameBoard = function(landing){
 	var $playArea = $('<div id="play-area">');
 	for (var i = 0; i < this.numRounds; i++){
 		var $code = $('<li class="code hidden">');
@@ -127,7 +124,7 @@ droidSearch.renderGameBoard = function(){
 		$round.text(i+1);
 		$code.append($round);
 		for (var j = 0; j < this.codeLength; j++){
-			var $el = $('<li class="element">');
+			var $el = $('<li class="element active">');
 			$code.append($el);
 		};
 		var $result = $('<li class="result">');
@@ -136,12 +133,12 @@ droidSearch.renderGameBoard = function(){
 		$code.append($result);
 		$playArea.append($code);
 	};
-	$('#landing').append($playArea);
+	landing.append($playArea);
 };
 
 
 // ***RENDER SELECTABLE DROIDS AREA***
-droidSearch.renderSelectableDroids = function(){
+droidSearch.renderSelectableDroids = function(landing){
 	var $droidHome = $('<div id="droid-home">');
 	for (var i = 0; i < this.selectableDroids.length; i++){ 
 		var $droid = $('<li class=droid draggable="true">');
@@ -157,7 +154,7 @@ droidSearch.renderSelectableDroids = function(){
 		};
 		$droidHome.append($droid);		
 	};
-	$('#landing').append($droidHome);
+	landing.append($droidHome);
 };
 
 
@@ -195,21 +192,26 @@ droidSearch.displayNextRound = function(round){
 	if (round == this.numRounds){
 		console.log("This is the last round already!");
 	} else {
-	var $currentRound = $('.code[value='+round+']');
-	var $nextRound = $('.code[value='+(round+1)+']');
-	$currentRound.toggleClass('active');
-	$nextRound.fadeIn().css('display','flex');
-	$nextRound.toggleClass('hidden').toggleClass('active');
+		var $currentRound = $('.code[value='+round+']');
+		var $nextRound = $('.code[value='+(round+1)+']');
+		$currentRound.removeClass('active');
+		$currentRound.children().removeClass('active');
+		$currentRound.addClass('inactive');
+		$currentRound.children().addClass('inactive');
+		$currentRound.children().off();
+		$nextRound.fadeIn().css('display','flex');
+		$nextRound.toggleClass('hidden').addClass('active');
 
 	};
-	this.setDropHandler();
 };
 
 // *** CHECK & DISPLAY WIN ***
 // Check for a win condition and display the appropriate status
-droidSearch.checkDisplayWinStatus = function(roundResult){
+droidSearch.checkDisplayWinStatus = function(roundResult,message){
 	if(roundResult[0] == this.codeLength) {
-		$('.message').toggleClass('overlay');
+		$('h2').remove(); //Remove any h2s that may have been created from previous games
+		message.prepend('<h2>');
+		message.show();
 		$('h2').text('YOU WIN!');
 		return true;
 	};
@@ -218,9 +220,11 @@ droidSearch.checkDisplayWinStatus = function(roundResult){
 
 // *** CHECK & DISPLAY LOSS ***
 // Check for a lose condition and display the appropriate status
-droidSearch.checkDisplayLoseStatus = function(round, roundResult){
+droidSearch.checkDisplayLoseStatus = function(round, roundResult, message){
 	if((round == this.numRounds) && !(roundResult[0] == this.codeLength)) {
-		$('.message').toggleClass('overlay');
+		$('h2').remove(); //Remove any h2s that may have been created from previous games
+		message.prepend('<h2>');
+		message.show();
 		$('h2').text("Yikes :( These are NOT the droids I'm looking for...");
 		return true;
 	};
@@ -248,71 +252,135 @@ $('.droid').on('mousedown', function(evt){
 droidSearch.setDropHandler = function(){
 	var scope = this;
 
-	$('.code.active li.element').on('drop', function(e){
-		e.preventDefault();
-        e.stopPropagation();
-        $(this).css({
+	// if( ($('.code.active li.element').parent()).hasClass("active") ){
+	// 	console.log("ACTIVE")
+	// }
+
+	// if (($('.code li.element').parent()).hasClass("active")){
+
+		$('li.element.active').on('drop', function(e){
+			e.preventDefault();
+        	e.stopPropagation();
+        	$(this).css({
 			"background"		: "url(" + scope.droidsAll[scope.droidDragKey].url + ")",
 			"background-size" 	: "cover"
-		});
-		$(this).val(scope.droidDragKey);
-    });
-	
-	$('.code.active li.element').on('dragover',function(e){
-    	e.preventDefault();
-        e.stopPropagation();
-	});		
+			});
+			$(this).val(scope.droidDragKey);
+	    }); 
+	    $('li.element.active').on('dragover',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+    	}); 
+	// } else if ( ($('.code li.element').parent()).hasClass("inactive") ){
+	// 	($('.code li.element')).off()
+	// };
 };
 
 // SUBMIT Handler
 // Listents for submit events for each code submission
-droidSearch.setSumbitGuessHandler = function(){
+droidSearch.setSumbitGuessHandler = function(message){
 	var scope = this;
 	$('button#submit-guess').on('click', function(e){
 		$(this).toggleClass('hidden');
 		var $round = $(this).parent().val();
 		var roundResult = scope.validateGuess(scope.getPlayerGuess($round));
 		scope.printGuessResult($round, roundResult);
-		scope.checkDisplayLoseStatus($round, roundResult);
-		if(($round != scope.numRounds) && !(scope.checkDisplayWinStatus(roundResult))) {
-			scope.displayNextRound($round);
+		scope.checkDisplayLoseStatus($round, roundResult, message);
+		if(!(scope.checkDisplayWinStatus(roundResult, message))) {
+			if($round != scope.numRounds){
+				scope.displayNextRound($round);
+			};
 		};
 	});
 };
 
 
+
+
 // Initialize the game.
-droidSearch.init = function(){
-	$('#landing').empty();
+droidSearch.init = function(landing,message){
+	landing.empty();
 	this.selectableDroids = [];
 	this.answer = [];
-	this.parseDifficulty(0);
+	this.parseDifficulty(this.level);
 	this.setSelectableDroids();
-	this.renderGameBoard();
-	$('li.code[value=1]').toggleClass('hidden').toggleClass('active'); // Display the first round!!
-	this.renderSelectableDroids();
+	this.renderGameBoard(landing);
+	$('li.code[value=1]').toggleClass('hidden').addClass("active"); // Display the first round!!
+	this.renderSelectableDroids(landing);
 	this.setDragHandler();
 	this.setDropHandler();
-	this.setSumbitGuessHandler();
+	this.setSumbitGuessHandler(message);
 }
 
 
 // START NEW GAME Handler
-droidSearch.startGameHandler = function(){
+droidSearch.startGameHandler = function(landing,message){
 	var scope = this;
-	$(document).on('click', '.message button', (function(){
-		scope.init();
-		$('.message').toggleClass('overlay');
-	})
+	var $levels = $('<fieldset data-role="controlgroup"></fieldset>').prepend(
+		$('<legend>Choose a diffculty level</legend>'),
+		$('<input />')
+			.attr({
+				'type':'radio',
+				'name': 'level',
+				'id': 'easy',
+				'value': 'easy'
+			}),
+		$('<label />')
+			.attr({
+				'for':'easy'
+			}).text('Easy  '),
+		$('<input />')
+			.attr({
+				'type':'radio',
+				'name': 'level',
+				'id': 'medium',
+				'value': 'medium',
+				'checked': 'checked'
+			}),
+		$('<label />')
+			.attr({
+				'for':'medium'
+			}).text('Medium  '),
+		$('<input />')
+			.attr({
+				'type':'radio',
+				'name': 'level',
+				'id': 'hard',
+				'value': 'hard'
+			}),
+		$('<label />')
+			.attr({
+				'for':'hard'
+			}).text('Hard')	
+		);
+	message.append($levels);
+
+	$newButton = $('<button id="start-game" type="submit">');
+	$newButton.text('Start New Game');
+	message.append($newButton);
+
+	$(document).on('click', ':radio', (function(){
+		if($('#easy').is(':checked')) { scope.level = 1; }
+		else if($('#medium').is(':checked')) { scope.level = 2; }
+		else if($('#hard').is(':checked')) { scope.level = 3; }
+	}));
+
+	$(document).on('click', '#start-game', (function(){
+		if(scope.level == 0) { alert("Select a level to begin!") ;
+		} else {
+			message.hide();
+			console.log('Clicked!');
+			scope.init(landing,message);
+		};
+		})
 	);
 }
 
 
 
 $(function(){
-	droidSearch.init();
-	droidSearch.startGameHandler();
+	var $landing = $('#landing');
+	var $message = $('#message');
+	droidSearch.startGameHandler($landing,$message);
 	
-
-
 });

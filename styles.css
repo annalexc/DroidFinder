@@ -41,11 +41,14 @@ h1 {
   color: white;
   font-size: 4.5em;
   text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+  /*visibility: hidden;*/
 }
 
 h2 {
   font: 5em 'Quicksand';
+  font-weight: 700;
   color: white;
+  margin: 0 auto 30px;
 }
 
 header {
@@ -106,6 +109,27 @@ header {
   background-size: 4px 4px;
 }  
 
+
+#message {
+  display: flex;
+  color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  position: fixed;
+  text-align: center;
+  background-color: rgba(0,0,0,0.7); 
+  height: 100%;
+  width: 100%;
+  padding: 0 100px;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+
+
+/*
 .message {
   opacity: 0;
   background-color: transparent;
@@ -126,11 +150,12 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
-}
+}*/
 
 
 #landing {
   width: 780px;
+  top: 320px;
   padding: 0;
   margin: 0 auto;
   position: relative;
@@ -139,7 +164,6 @@ header {
 
 #play-area {
   position: relative;
-  top: 320px;
   display: flex;
   height: 100%;
   width: 100%;
@@ -170,7 +194,7 @@ header {
 
 .round {
   color: rgba(124,104,100,0.75);
-  text-shadow: 1px 1.5px 1.5px rgba(255,255,255,0.4);
+  text-shadow: 1px 1.5px 1.5px rgba(255,255,255,0.5);
   font-size: 4.1em;
   text-align: left;
   width: 11%;
@@ -229,8 +253,8 @@ header {
   border: 5px solid snow;
 }
 
-.hidden {
-  display: none;
+.overlay{
+  opacity: 0;
 }
 
 /**********************************
@@ -259,6 +283,31 @@ FUN EFFECTS WITH SELECTABLE DROIDS
   left: 0;
 }
 
+
+fieldset {
+  font: 1.8em 'Quicksand';
+  color: rgb(225,204,200);
+  padding: 11px;
+  border: none;
+  width: 550px;
+  margin: 0 auto 30px;
+  border: 2px solid rgb(225,204,200);
+  border-radius: 2em;
+}
+legend {
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+input[type='radio']{
+    margin: 11px;
+}
+
+input[type='radio'], label{   
+   display: inline;
+   vertical-align: top;
+}
+
 /**********************************
     FUN EFFECTS WITH BUTTONS
 ***********************************/
@@ -266,13 +315,13 @@ FUN EFFECTS WITH SELECTABLE DROIDS
 
 button {
   margin: 0 auto;
-  width: 175px;
+  width: 195px;
   background-color: rgb(144,121,116);
   border-radius: 2em;
   display: inline-block;
   cursor: pointer;
   color: white;
-  font: 0.5em 'Arvo';
+  font: 0.55em 'Arvo';
   padding: 7px;
   text-decoration:none;
   box-shadow:0px 5px 0px rgb(111,93,90);
@@ -280,12 +329,14 @@ button {
 }
 
 button#start-game {
-  background-color: rgb(144,121,116);
-  width: 300px;
+  background-color: transparent;
+  width: 450px;
+  border: 6px solid rgb(225,204,200);
   border-radius: 0.25em;
   cursor: pointer;
-  color: white;
-  font: 2em 'Arvo';
+  padding: 10px;
+  color: rgb(225,204,200);
+  font: 3em 'Quicksand';
 }
 
 button:hover, button#start-game:hover {
@@ -295,6 +346,11 @@ button:hover, button#start-game:hover {
 button:active, button#start-game:active {
   position:relative;
   top:1px;
+}
+
+
+.hidden {
+  display: none;
 }
 
 
