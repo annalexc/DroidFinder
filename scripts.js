@@ -6,16 +6,16 @@ var droidSearch = {};
 // Array of possible values
 droidSearch.droidsAll = {
 	1: 	{ 	name: "BB-8",
-		 	url: "https://hectorelarquitecto.files.wordpress.com/2015/11/bb8-droid.png"
+		 	url: "img/bb8.png"
 		},
 	2: 	{	name: "R2D2",
-		 	url: "http://files.softicons.com/download/tv-movie-icons/star-wars-characters-icons-by-jonathan-rey/png/256x256/R2D2%20-%2001.png"
+		 	url: "img/r2d2.png"
 		}, 
 	3: 	{	name: "C3P0",
-		 	url: "http://iconbug.com/data/e4/256/99b54f94821fa8a154943524a6e45f38.png"
+		 	url: "img/c3p0.png"
 		},
 	4: 	{	name: "Wall-E",
-		 	url: "https://cdn2.iconfinder.com/data/icons/walle/256/my_computer.png"
+		 	url: "img/wall-e.png"
 		},
 	5: 	{	name: "Rosie",
 		 	url: "https://carsonspeight.files.wordpress.com/2011/08/the_jetsons_by_jaimemolina.png"
@@ -46,7 +46,7 @@ droidSearch.parseDifficulty = function(difficulty){
 		case 0: 
 			this.codeLength = 4;
 			this.numDroids = 4;
-			this.numRounds = 2;
+			this.numRounds = 4;
 			break;
 		case 1: 
 			this.codeLength = 4;
@@ -92,6 +92,7 @@ droidSearch.setAnswerCode = function(){
 //
 droidSearch.validateGuess = function(playerGuess){
 	// Reset Round Result Summary (For now... [Correct, Nearly Correct, Wrong])
+	
 	var roundResult = [0,0,0]; 
 	// console.log("Player guess is: " + playerGuess);
 	// console.log("Answer is: "+ this.answer);
@@ -121,7 +122,6 @@ droidSearch.renderGameBoard = function(){
 	var $playArea = $('<div id="play-area">');
 	for (var i = 0; i < this.numRounds; i++){
 		var $code = $('<li class="code hidden">');
-		//if (i = 0) { $code.toggleClass("hidden");}
 		$code.val(i+1); // Attach Round number as a value of the code list item
 		var $round = $('<div class="round">');
 		$round.text(i+1);
@@ -132,7 +132,7 @@ droidSearch.renderGameBoard = function(){
 		};
 		var $result = $('<li class="result">');
 		$result.val(i+1); // Attach Round number as a value of the result list item
-		$result.append("<button type='submit'>Are these the droids I'm looking for?");
+		$result.append("<button id='submit-guess' type='submit'>Confirm Guess");
 		$code.append($result);
 		$playArea.append($code);
 	};
@@ -178,40 +178,8 @@ droidSearch.printGuessResult = function(round,roundResult){
 	};
 };
 
-
-// ****DRAG HANDLER***
-// Listens for mousedown events on a SELECTABLE DROID, and stores the key value of that droid as the global variable droidDragKey
-droidSearch.setDragHandler = function() {
-var scope = this;
-$('.droid').on('mousedown', function(evt){
-	scope.droidDragKey = evt.currentTarget.value;
-	});
-	
-};
-
-// ****DROP HANDLER***
-// Listens for drop events on a CODE ELEMENT, and updates the element bg image corresponding to the droidDragKey
-droidSearch.setDropHandler = function(){
-	var scope = this;
-
-	$('.code.active li.element').on('drop', function(e){
-		e.preventDefault();
-        e.stopPropagation();
-        $(this).css({
-			"background" : "url(" + scope.droidsAll[scope.droidDragKey].url + ")",
-			"background-size" 	: "cover"	
-		});
-		$(this).val(scope.droidDragKey);
-    });
-	
-	$('.code.active li.element').on('dragover',function(e){
-    	e.preventDefault();
-        e.stopPropagation();
-	});		
-};
-
-// ***GET PLAYER GUESS***
-// Store player choice into an array. 
+// GET PLAYER GUESS
+// Store player choice into an array based on the current rounds
 droidSearch.getPlayerGuess = function(round){
 	var $elements = $('.code[value='+round+'] li.element');
 	var $playerGuess = [];
@@ -220,21 +188,8 @@ droidSearch.getPlayerGuess = function(round){
 	}
 	console.log(this.answer);
 	return $playerGuess;
-}
-
-droidSearch.setSumbitHandler = function(){
-	var scope = this;
-	$('button').on('click', function(e){
-		$(this).toggleClass('hidden');
-		var $round = $(this).parent().val();
-		var roundResult = scope.validateGuess(scope.getPlayerGuess($round));
-		scope.printGuessResult($round, roundResult);
-		scope.checkDisplayLoseStatus($round);
-		if(!scope.checkDisplayWinStatus(roundResult)) {
-			scope.displayNextRound($round);
-		};
-	});
 };
+
 
 droidSearch.displayNextRound = function(round){
 	if (round == this.numRounds){
@@ -243,6 +198,7 @@ droidSearch.displayNextRound = function(round){
 	var $currentRound = $('.code[value='+round+']');
 	var $nextRound = $('.code[value='+(round+1)+']');
 	$currentRound.toggleClass('active');
+	$nextRound.fadeIn().css('display','flex');
 	$nextRound.toggleClass('hidden').toggleClass('active');
 
 	};
@@ -262,8 +218,8 @@ droidSearch.checkDisplayWinStatus = function(roundResult){
 
 // *** CHECK & DISPLAY LOSS ***
 // Check for a lose condition and display the appropriate status
-droidSearch.checkDisplayLoseStatus = function(round){
-	if(round == this.numRounds) {
+droidSearch.checkDisplayLoseStatus = function(round, roundResult){
+	if((round == this.numRounds) && !(roundResult[0] == this.codeLength)) {
 		$('.message').toggleClass('overlay');
 		$('h2').text("Yikes :( These are NOT the droids I'm looking for...");
 		return true;
@@ -271,9 +227,65 @@ droidSearch.checkDisplayLoseStatus = function(round){
 };
 
 
+
+
+// ***** HANDLERS HANDLERS HANDLERS! ******
+// These functions handle the gnarly stuff!
+// ****************************************
+
+// DRAG Handler
+// Listens for mousedown events on a SELECTABLE DROID, and stores the key value of that droid as the global variable droidDragKey
+droidSearch.setDragHandler = function() {
+var scope = this;
+$('.droid').on('mousedown', function(evt){
+	scope.droidDragKey = evt.currentTarget.value;
+	});
+	
+};
+
+// DROP Handler
+// Listens for drop events on a CODE ELEMENT, and updates the element bg image corresponding to the droidDragKey
+droidSearch.setDropHandler = function(){
+	var scope = this;
+
+	$('.code.active li.element').on('drop', function(e){
+		e.preventDefault();
+        e.stopPropagation();
+        $(this).css({
+			"background"		: "url(" + scope.droidsAll[scope.droidDragKey].url + ")",
+			"background-size" 	: "cover"
+		});
+		$(this).val(scope.droidDragKey);
+    });
+	
+	$('.code.active li.element').on('dragover',function(e){
+    	e.preventDefault();
+        e.stopPropagation();
+	});		
+};
+
+// SUBMIT Handler
+// Listents for submit events for each code submission
+droidSearch.setSumbitGuessHandler = function(){
+	var scope = this;
+	$('button#submit-guess').on('click', function(e){
+		$(this).toggleClass('hidden');
+		var $round = $(this).parent().val();
+		var roundResult = scope.validateGuess(scope.getPlayerGuess($round));
+		scope.printGuessResult($round, roundResult);
+		scope.checkDisplayLoseStatus($round, roundResult);
+		if(($round != scope.numRounds) && !(scope.checkDisplayWinStatus(roundResult))) {
+			scope.displayNextRound($round);
+		};
+	});
+};
+
+
 // Initialize the game.
 droidSearch.init = function(){
 	$('#landing').empty();
+	this.selectableDroids = [];
+	this.answer = [];
 	this.parseDifficulty(0);
 	this.setSelectableDroids();
 	this.renderGameBoard();
@@ -281,12 +293,25 @@ droidSearch.init = function(){
 	this.renderSelectableDroids();
 	this.setDragHandler();
 	this.setDropHandler();
-	this.setSumbitHandler();
+	this.setSumbitGuessHandler();
 }
+
+
+// START NEW GAME Handler
+droidSearch.startGameHandler = function(){
+	var scope = this;
+	$(document).on('click', '.message button', (function(){
+		scope.init();
+		$('.message').toggleClass('overlay');
+	})
+	);
+}
+
 
 
 $(function(){
 	droidSearch.init();
+	droidSearch.startGameHandler();
 	
 
 

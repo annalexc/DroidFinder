@@ -1,29 +1,46 @@
 @import url(https://fonts.googleapis.com/css?family=Arvo);
 @import url(https://fonts.googleapis.com/css?family=Quicksand:700,400);
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One);
 
 /**********************************
 IMPORTANT DEFAULTS
 ***********************************/
 
-html, body { 
+html>body { 
   box-sizing: border-box;
   height: 100%;
+  min-height: 100%;
   width: 100%;
   margin: 0 auto;
   padding: 0;
-  background-color: burlywood;
+  background-color: rgb(207,174,167);
   font-size: 16px;
   font-family: 'Arvo';
 }
 
 *, *::before, *::after { box-sizing: inherit; }
 
+
+body {  
+  background: url("img/tatooine.png") no-repeat fixed;
+  background-size: cover;
+  background-position: center top;
+}
+
+
 h1 {
-  font-family: 'Quicksand';
+  background: url("img/tatooineheader.png") no-repeat fixed;
+  background-size: cover;
+  background-position: center top;
+  font-family: 'Fredoka One';
+  font-weight: 400;
+  line-height: 0.9em;
   padding: 0;
+  width: 900px;
   margin: 0;
   color: white;
-  font-size: 4em;
+  font-size: 4.5em;
+  text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
 }
 
 h2 {
@@ -32,18 +49,26 @@ h2 {
 }
 
 header {
-  margin: 30px auto;
+  display: flex; 
+  background-color: rgba(207,174,167,0.95);
+  justify-content: center;
+  width: 100%;
+  height: 180px;
+  position: fixed;
+  padding-top: 11px;
+  top: 0;
   text-align: center;
+  z-index: 11;
 }
 
 #droid-home {
   position: fixed;
-  top: 120px;
+  top: 140px;
   width: 780px; 
   height: 120px; 
-  background-color: rgb(155,128,94);
+  background-color: rgb(155,134,129);
   display: flex;
-  border-top: 2px solid rgb(111,92,67);
+  border-top: 2px solid rgb(123,109,106);
   justify-content: space-around;
   align-items: center;
   padding: 0.35em 0;
@@ -52,7 +77,18 @@ header {
   color: white;
   text-align: center;
   text-indent: .1em;
+  z-index: 11;
 }
+
+#droid-home::before {
+  content: 'Drag one of these droids to an empty slot below.';
+  position: absolute;
+  font-size: 1.3em;
+  color:rgb(123,109,106);
+  left: 135px;
+  bottom: -25px;
+}
+
 
 #droid-home::after {
   content: '';
@@ -63,15 +99,16 @@ header {
   left: -5%;
   background: inherit;
   border-radius: 5% / 49%;
-  border-left: 2px solid rgb(111,92,67);
-  border-right: 2px solid rgb(111,92,67);
+  border-left: 2px solid rgb(123,109,106);
+  border-right: 2px solid rgb(123,109,106);
   z-index: -1;
-  box-shadow: 0px 12px 0 rgb(111,92,67);
+  box-shadow: 0px 12px 0 rgb(123,109,106);
   background-size: 4px 4px;
 }  
 
 .message {
   opacity: 0;
+  background-color: transparent;
 }
 
 .overlay {
@@ -88,44 +125,70 @@ header {
   opacity: 1;
   top: 0;
   left: 0;
+  z-index: 1000;
 }
 
 
 #landing {
   width: 780px;
-  padding-top: 150px;
+  padding: 0;
   margin: 0 auto;
   position: relative;
   background-color: transparent;
 }
 
 #play-area {
+  position: relative;
+  top: 320px;
   display: flex;
   height: 100%;
   width: 100%;
   flex-direction: column-reverse;
-  margin-bottom: 150px;
-  overflow: auto;
 }
 
 .code {
+  background-color: rgba(124,104,100,0.30);
+  border: 1px solid rgb(124,104,100) ;
+  border-radius: 2em;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 	height: 8%;
   padding: 0.35em 0;
+  margin-bottom: 6px;
+}
+
+.code.active {
+  border: 2px solid rgba(255,255,255,0.40);
+  background-color: rgba(255,255,255,0.35);
+  box-shadow: inset -2px -3px 10px -2px rgba(0,0,0,0.3);
+  border-radius: 2em;
+ 
+
 }
 
 .round {
-  color: rgba(177,147,108,0.75);
-  text-shadow: 1px 1.5px 1.5px rgba(255,255,255,0.3);
-  font-size: 4em;
-  vertical-align: middle;
-  text-align: center;
-  width: 8%;
+  color: rgba(124,104,100,0.75);
+  text-shadow: 1px 1.5px 1.5px rgba(255,255,255,0.4);
+  font-size: 4.1em;
+  text-align: left;
+  width: 11%;
   height: 100%;
-  padding: 0;
+  padding: 10px 0 0 0;
+  position: relative;
+}
+
+.round::before {
+  content: "guess";
+  display: inline-block;
+  position: relative;
+  height: 10px;
+  top: -51px;
+  left: 14px;
+  width: 15px;
+  font: bold 0.325em 'Quicksand';
+  color: rgba(124,104,100,1);
 }
 
 .element {
@@ -133,13 +196,13 @@ header {
   vertical-align: middle;
   width: 10.47%;
   padding-bottom: 10.47%;
-  background-color: rgb(199,165,121);
+  background-color: rgba(144,121,116,0.4);
   box-shadow: 1.75px 1.75px 1.75px rgba(255,255,255,0.3);
   border-radius: 50%;
 }
 
 .element:hover {
-  background-color: rgb(155,128,94);
+  background-color: rgba(124,104,100,0.55);
 }
 
 .result {
@@ -175,13 +238,13 @@ FUN EFFECTS WITH SELECTABLE DROIDS
 ***********************************/
 
 @keyframes wiggle {
-  0% { transform: rotateZ(7deg); }
-  50% { transform: rotateZ(-7deg); }
-  100% { transform: rotateZ(7deg); }
+  0% { transform: rotateZ(5deg); }
+  50% { transform: rotateZ(-5deg); }
+  100% { transform: rotateZ(5deg); }
 }
 
 .droid:hover { 
-  animation: wiggle 0.15s ease infinite;
+  animation: wiggle 0.125s ease infinite;
 
 }
 
@@ -190,7 +253,7 @@ FUN EFFECTS WITH SELECTABLE DROIDS
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: rgba(0,0,0,0.2);
+  background: rgba(255,255,255,0.25);
   position: absolute;
   top: 0;
   left: 0;
@@ -203,33 +266,33 @@ FUN EFFECTS WITH SELECTABLE DROIDS
 
 button {
   margin: 0 auto;
-  background-color: rgb(155,128,94);
+  width: 175px;
+  background-color: rgb(144,121,116);
   border-radius: 2em;
   display: inline-block;
   cursor: pointer;
   color: white;
-  font: 0.45em 'Arvo';
+  font: 0.5em 'Arvo';
   padding: 7px;
   text-decoration:none;
-  box-shadow:0px 5px 0px rgb(111,92,67);
+  box-shadow:0px 5px 0px rgb(111,93,90);
   outline: none;
 }
 
-button#restart {
-  background-color: rgb(155,128,94);
-  width: 25%;
+button#start-game {
+  background-color: rgb(144,121,116);
+  width: 300px;
   border-radius: 0.25em;
   cursor: pointer;
   color: white;
-  font: 3em 'Arvo';
+  font: 2em 'Arvo';
 }
 
-
-button:hover, button#restart:hover {
-  background-color: rgb(88,73,54);
+button:hover, button#start-game:hover {
+  background-color: rgb(124,104,100);
 }
 
-button:active, button#restart:active {
+button:active, button#start-game:active {
   position:relative;
   top:1px;
 }
