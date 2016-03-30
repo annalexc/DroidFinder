@@ -13,35 +13,30 @@ html>body {
   width: 100%;
   margin: 0 auto;
   padding: 0;
-  background-color: rgb(207,174,167);
+  background-color: rgb(204,174,166);
   font-size: 16px;
   font-family: 'Arvo';
 }
 
 *, *::before, *::after { box-sizing: inherit; }
 
-
 body {  
-  background: url("img/tatooine.png") no-repeat fixed;
+  background: url("img/tatooinebg1.png") no-repeat fixed;
   background-size: cover;
   background-position: center top;
 }
 
 
 h1 {
-  background: url("img/tatooineheader.png") no-repeat fixed;
-  background-size: cover;
-  background-position: center top;
   font-family: 'Fredoka One';
   font-weight: 400;
   line-height: 0.9em;
   padding: 0;
-  width: 900px;
-  margin: 0;
+  width: 1000px;
+  margin: 0 auto 12px;
   color: white;
-  font-size: 4.5em;
+  font-size: 5em;
   text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
-  /*visibility: hidden;*/
 }
 
 h2 {
@@ -52,44 +47,41 @@ h2 {
 }
 
 header {
+  background: url("img/tatooineheader.png") no-repeat fixed;
+  background-size: contain;
+  background-position: top center;
+  position: fixed;
   display: flex; 
-  background-color: rgba(207,174,167,0.95);
+  flex-direction: column;
   justify-content: center;
   width: 100%;
-  height: 180px;
-  position: fixed;
-  padding-top: 11px;
-  top: 0;
+  height: 275px;
   text-align: center;
   z-index: 11;
 }
 
 #droid-home {
-  position: fixed;
-  top: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
   width: 780px; 
   height: 120px; 
   background-color: rgb(155,134,129);
-  display: flex;
   border-top: 2px solid rgb(123,109,106);
-  justify-content: space-around;
-  align-items: center;
   padding: 0.35em 0;
-  margin: 20px 0;
   border-radius: 50% / 12.75%;
-  color: white;
-  text-align: center;
-  text-indent: .1em;
   z-index: 11;
 }
 
 #droid-home::before {
   content: 'Drag one of these droids to an empty slot below.';
   position: absolute;
-  font-size: 1.3em;
-  color:rgb(123,109,106);
-  left: 135px;
-  bottom: -25px;
+  font-size: 1.1em;
+  color: rgba(255,255,255,0.75);
+  left: 190px;
+  top: 110px;
 }
 
 
@@ -101,21 +93,34 @@ header {
   right: -5%;
   left: -5%;
   background: inherit;
-  border-radius: 5% / 49%;
-  border-left: 2px solid rgb(123,109,106);
-  border-right: 2px solid rgb(123,109,106);
+  border-radius: 5% / 48%;
+  border-left: 2.5px solid rgb(123,109,106);
+  border-right: 2.5px solid rgb(123,109,106);
   z-index: -1;
-  box-shadow: 0px 12px 0 rgb(123,109,106);
-  background-size: 4px 4px;
+  box-shadow: 0px 30px 0 rgb(123,109,106);
 }  
+
+.droid {
+  display: inline-block;
+  vertical-align: middle;
+  width: 80px;
+  height: 80px;
+ /* width: 12.96%;
+  height: 85%;*/
+  width: 90px;
+  height: 90px;
+  margin: 0 4px 6px;
+  border-radius: 50%;
+  border: 5px solid snow;
+}
 
 
 #message {
   display: flex;
-  color: white;
   flex-direction: column;
   justify-content: center;
   align-content: center;
+  color: white;
   position: fixed;
   text-align: center;
   background-color: rgba(0,0,0,0.7); 
@@ -126,32 +131,6 @@ header {
   left: 0;
   z-index: 1000;
 }
-
-
-
-/*
-.message {
-  opacity: 0;
-  background-color: transparent;
-}
-
-.overlay {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  position: fixed;
-  text-align: center;
-  background-color: rgba(0,0,0,0.75); 
-  height: 100%;
-  width: 100%;
-  padding: 0 100px;
-  opacity: 1;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-}*/
-
 
 #landing {
   width: 780px;
@@ -174,6 +153,7 @@ header {
   background-color: rgba(124,104,100,0.30);
   border: 1px solid rgb(124,104,100) ;
   border-radius: 2em;
+  height: 105.5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -241,18 +221,6 @@ header {
   font-size: 2.25em;
 }
 
-
-.droid {
-  display: inline-block;
-  vertical-align: middle;
-  width: 12.96%;
-  height: 85%;
-  margin: 0 5px;
-  background-color: darkgray;
-  border-radius: 50%;
-  border: 5px solid snow;
-}
-
 .overlay{
   opacity: 0;
 }
@@ -295,6 +263,7 @@ fieldset {
   border-radius: 2em;
 }
 legend {
+  text-align: center;
   font-size: 1.25em;
   font-weight: 700;
 }
@@ -348,6 +317,9 @@ button:active, button#start-game:active {
   top:1px;
 }
 
+.opaque {
+  visibility: hidden;
+}
 
 .hidden {
   display: none;

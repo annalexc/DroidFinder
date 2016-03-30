@@ -6,25 +6,25 @@ var droidSearch = {};
 // Array of possible values
 droidSearch.droidsAll = {
 	1: 	{ 	name: "BB-8",
-		 	url: "img/bb8.png"
+		 	url: "img/droids/bb8.png"
 		},
 	2: 	{	name: "R2D2",
-		 	url: "img/r2d2.png"
+		 	url: "img/droids/r2d2.png"
 		}, 
 	3: 	{	name: "C3P0",
-		 	url: "img/c3p0.png"
+		 	url: "img/droids/c3p0.png"
 		},
 	4: 	{	name: "Wall-E",
-		 	url: "img/wall-e.png"
+		 	url: "img/droids/wall-e.png"
 		},
 	5: 	{	name: "Rosie",
-		 	url: "https://carsonspeight.files.wordpress.com/2011/08/the_jetsons_by_jaimemolina.png"
+		 	url: "img/droids/rosie.png"
 		},
 	6: 	{	name: "EVE",
-		 	url: "img/eve.png"
+		 	url: "img/droids/eve.png"
 		},
 	7: 	{	name: "Baymax",
-		 	url: "http://vignette2.wikia.nocookie.net/smashbroslawlorigins/images/f/f8/Baymax.png"
+		 	url: "img/droids/baymax.png"
 		},		
 	8: 	{	name: "Android",
 		 	url: "https://thecustomizewindows.com/wp-content/uploads/2011/11/Nicest-Android-Live-Wallpapers.png"
@@ -138,8 +138,8 @@ droidSearch.renderGameBoard = function(landing){
 
 
 // ***RENDER SELECTABLE DROIDS AREA***
-droidSearch.renderSelectableDroids = function(landing){
-	var $droidHome = $('<div id="droid-home">');
+droidSearch.renderSelectableDroids = function(droidHome){
+
 	for (var i = 0; i < this.selectableDroids.length; i++){ 
 		var $droid = $('<li class=droid draggable="true">');
 		var key = this.droidsAll[this.selectableDroids[i]];
@@ -148,13 +148,14 @@ droidSearch.renderSelectableDroids = function(landing){
 			"background" 		: "url(" + key.url + ")",
 			"background-size" 	: "cover"
 		});
-		if (this.numDroids === 8){ $droid.css("height","80.42%");
-		} else if (this.numDroids === 6){ $droid.css("height","91.98%");
-		} else if (this.numDroids === 4){ $droid.css("height","92.9%");
-		};
-		$droidHome.append($droid);		
+		// if (this.numDroids === 8){ $droid.css("height","80.42%");
+		// } else if (this.numDroids === 6){ $droid.css("height","91.98%");
+		// } else if (this.numDroids === 4){ $droid.css("height","92.9%");
+		// };
+		droidHome.append($droid);		
 	};
-	landing.append($droidHome);
+	// $('header').append($droidHome);
+	//landing.append($droidHome);
 };
 
 
@@ -224,8 +225,8 @@ droidSearch.checkDisplayLoseStatus = function(round, roundResult, message){
 	if((round == this.numRounds) && !(roundResult[0] == this.codeLength)) {
 		$('h2').remove(); //Remove any h2s that may have been created from previous games
 		message.prepend('<h2>');
-		message.show();
-		$('h2').text("Yikes :( These are NOT the droids I'm looking for...");
+		message.fadeIn();
+		$('h2').text(":( Sorry, these are NOT the droids you're looking for...");
 		return true;
 	};
 };
@@ -251,13 +252,6 @@ $('.droid').on('mousedown', function(evt){
 // Listens for drop events on a CODE ELEMENT, and updates the element bg image corresponding to the droidDragKey
 droidSearch.setDropHandler = function(){
 	var scope = this;
-
-	// if( ($('.code.active li.element').parent()).hasClass("active") ){
-	// 	console.log("ACTIVE")
-	// }
-
-	// if (($('.code li.element').parent()).hasClass("active")){
-
 		$('li.element.active').on('drop', function(e){
 			e.preventDefault();
         	e.stopPropagation();
@@ -271,9 +265,6 @@ droidSearch.setDropHandler = function(){
 			e.preventDefault();
 			e.stopPropagation();
     	}); 
-	// } else if ( ($('.code li.element').parent()).hasClass("inactive") ){
-	// 	($('.code li.element')).off()
-	// };
 };
 
 // SUBMIT Handler
@@ -298,15 +289,17 @@ droidSearch.setSumbitGuessHandler = function(message){
 
 
 // Initialize the game.
-droidSearch.init = function(landing,message){
-	landing.empty();
+droidSearch.init = function(droidHome, message, landing){
+	landing.empty();					// Empty the landing area of data from previous game
+	droidHome.empty();					// Empty selectable droid area.
+	droidHome.removeClass('opaque');	
 	this.selectableDroids = [];
 	this.answer = [];
 	this.parseDifficulty(this.level);
 	this.setSelectableDroids();
 	this.renderGameBoard(landing);
-	$('li.code[value=1]').toggleClass('hidden').addClass("active"); // Display the first round!!
-	this.renderSelectableDroids(landing);
+	$('li.code[value=1]').toggleClass('hidden').addClass('active'); // Display the first round and set it to ACTIVE.
+	this.renderSelectableDroids(droidHome);
 	this.setDragHandler();
 	this.setDropHandler();
 	this.setSumbitGuessHandler(message);
@@ -314,44 +307,32 @@ droidSearch.init = function(landing,message){
 
 
 // START NEW GAME Handler
-droidSearch.startGameHandler = function(landing,message){
+droidSearch.startGameHandler = function(droidHome,message,landing){
 	var scope = this;
+
+	// Create Difficulty Level Radio Buttons!
 	var $levels = $('<fieldset data-role="controlgroup"></fieldset>').prepend(
 		$('<legend>Choose a diffculty level</legend>'),
+		// Easy Level Radio Button
 		$('<input />')
-			.attr({
-				'type':'radio',
-				'name': 'level',
-				'id': 'easy',
-				'value': 'easy'
+			.attr({'type':'radio','name': 'level','id': 'easy','value': 'easy'
 			}),
 		$('<label />')
-			.attr({
-				'for':'easy'
-			}).text('Easy  '),
+			.attr({'for':'easy'}).text('Easy  '),
+		// Medium Level Radio Button
 		$('<input />')
-			.attr({
-				'type':'radio',
-				'name': 'level',
-				'id': 'medium',
-				'value': 'medium'
+			.attr({'type':'radio','name': 'level','id': 'medium','value': 'medium'
 			}),
 		$('<label />')
-			.attr({
-				'for':'medium'
-			}).text('Medium  '),
+			.attr({'for':'medium'}).text('Medium  '),
+		// Hard Level Radio Button
 		$('<input />')
-			.attr({
-				'type':'radio',
-				'name': 'level',
-				'id': 'hard',
-				'value': 'hard'
+			.attr({'type':'radio','name': 'level','id': 'hard','value': 'hard'
 			}),
 		$('<label />')
-			.attr({
-				'for':'hard'
-			}).text('Hard')	
+			.attr({'for':'hard'}).text('Hard')	
 		);
+	// Finished creating radio buttons. Now attach to message div!
 	message.append($levels);
 
 	$newButton = $('<button id="start-game" type="submit">');
@@ -369,7 +350,7 @@ droidSearch.startGameHandler = function(landing,message){
 		} else {
 			message.hide();
 			console.log('Clicked!');
-			scope.init(landing,message);
+			scope.init(droidHome,message,landing);
 		};
 		})
 	);
@@ -378,8 +359,10 @@ droidSearch.startGameHandler = function(landing,message){
 
 
 $(function(){
-	var $landing = $('#landing');
+	
 	var $message = $('#message');
-	droidSearch.startGameHandler($landing,$message);
+	var $landing = $('#landing');
+	var $droidHome = $('#droid-home');
+	droidSearch.startGameHandler($droidHome, $message, $landing);
 	
 });
