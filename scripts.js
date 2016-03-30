@@ -334,8 +334,7 @@ droidSearch.startGameHandler = function(landing,message){
 				'type':'radio',
 				'name': 'level',
 				'id': 'medium',
-				'value': 'medium',
-				'checked': 'checked'
+				'value': 'medium'
 			}),
 		$('<label />')
 			.attr({
