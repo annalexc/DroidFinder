@@ -27,7 +27,7 @@ droidSearch.droidsAll = {
 		 	url: "img/droids/baymax.png"
 		},		
 	8: 	{	name: "Android",
-		 	url: "https://thecustomizewindows.com/wp-content/uploads/2011/11/Nicest-Android-Live-Wallpapers.png"
+		 	url: "img/droids/android.png"
 		},	
 	}
 droidSearch.droidDragKey;	// This holds the "key" of the droid being dragged to a peg element
@@ -107,7 +107,7 @@ droidSearch.validateGuess = function(playerGuess){
 		};
 	};
 	// Determine number of wrong guesses (No droids that we are looking for...)
-	roundResult[2] = this.numDroids - (roundResult[0] + roundResult[1]);
+	roundResult[2] = this.codeLength - (roundResult[0] + roundResult[1]);
 	return roundResult;
 };
 
@@ -165,16 +165,22 @@ droidSearch.printGuessResult = function(round,roundResult){
 	var $result = $('.result[value='+round+']');
 	var $html = $result.html();
 	var correct = roundResult[0]; // Black pegs represent droids that are present && in the correct position
-	var reposition = roundResult[1]; // White pegs represent presence of correct droid that must be re-positioned
+	var reposition = roundResult[1];  // White pegs represent presence of correct droid that must be re-positioned
+	var wrong = this.codeLength - (correct + reposition); // Circles with Xs represent incorrect droids
 	for (var i = 0; i < correct; i++){
 		$result.html($html+"&#9899; ");
 		$html = $result.html();
 	};
-	for (var i = 0; i < reposition; i++){
+	for (var j = 0; i < reposition; i++){
 		$result.html($html+"&#9898; ");
 		$html = $result.html();
 	};
+	for (var k = 0; i < wrong; i++){
+		$result.html($html+"&#8855;    ");
+		$html = $result.html();
+	};
 };
+
 
 // GET PLAYER GUESS
 // Store player choice into an array based on the current rounds
@@ -289,7 +295,8 @@ droidSearch.setSumbitGuessHandler = function(message){
 
 
 // Initialize the game.
-droidSearch.init = function(droidHome, message, landing){
+droidSearch.init = function(welcome,droidHome, message, landing){
+	welcome.hide();
 	landing.empty();					// Empty the landing area of data from previous game
 	droidHome.empty();					// Empty selectable droid area.
 	droidHome.removeClass('opaque');	
@@ -307,12 +314,12 @@ droidSearch.init = function(droidHome, message, landing){
 
 
 // START NEW GAME Handler
-droidSearch.startGameHandler = function(droidHome,message,landing){
+droidSearch.startGameHandler = function(welcome,droidHome,message,landing){
 	var scope = this;
 
 	// Create Difficulty Level Radio Buttons!
 	var $levels = $('<fieldset data-role="controlgroup"></fieldset>').prepend(
-		$('<legend>Choose a diffculty level</legend>'),
+		$('<legend>Choose a Level</legend>'),
 		// Easy Level Radio Button
 		$('<input />')
 			.attr({'type':'radio','name': 'level','id': 'easy','value': 'easy'
@@ -336,7 +343,7 @@ droidSearch.startGameHandler = function(droidHome,message,landing){
 	message.append($levels);
 
 	$newButton = $('<button id="start-game" type="submit">');
-	$newButton.text('Start New Game');
+	$newButton.text('Start Game');
 	message.append($newButton);
 
 	$(document).on('click', ':radio', (function(){
@@ -346,11 +353,11 @@ droidSearch.startGameHandler = function(droidHome,message,landing){
 	}));
 
 	$(document).on('click', '#start-game', (function(){
-		if(scope.level == 0) { alert("Select a level to begin!") ;
+		if(scope.level == 0) { alert("Choose a level to begin!") ;
 		} else {
 			message.hide();
 			console.log('Clicked!');
-			scope.init(droidHome,message,landing);
+			scope.init(welcome,droidHome,message,landing);
 		};
 		})
 	);
@@ -359,10 +366,10 @@ droidSearch.startGameHandler = function(droidHome,message,landing){
 
 
 $(function(){
-	
+	var $welcome = $('#welcome');
 	var $message = $('#message');
 	var $landing = $('#landing');
 	var $droidHome = $('#droid-home');
-	droidSearch.startGameHandler($droidHome, $message, $landing);
+	droidSearch.startGameHandler($welcome, $droidHome, $message, $landing);
 	
 });
