@@ -17,7 +17,7 @@ _**Hmm, ok. Summary please?**_
 
 Level | Code Length | Selectable Droids | Rounds (Guesses)
 --- | --- | --- | ---
-Easy |  4  |  4  |  8
+Easy |  4  |  5  |  8
 Medium |  4  |  6  |  10
 Hard |  5  |  8  |  12
 
