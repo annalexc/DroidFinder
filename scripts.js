@@ -166,17 +166,23 @@ droidSearch.printGuessResult = function(round,roundResult){
 	var correct = roundResult[0]; // Black pegs represent droids that are present && in the correct position
 	var reposition = roundResult[1];  // White pegs represent presence of correct droid that must be re-positioned
 	var wrong = roundResult[2]; // Circles with Xs represent incorrect droids
-	for (var i = 0; i < correct; i++){
-		$result.html($html+"&#9899; ");
-		$html = $result.html();
+	if(correct > 0){
+		for (var i = 0; i < correct; i++){
+			$result.html($html+"&#9899; ");
+			$html = $result.html();
+		};
 	};
-	for (var j = 0; i < reposition; j++){
-		$result.html($html+"&#9898; ");
-		$html = $result.html();
+	if(reposition > 0){
+		for (var i = 0; i < reposition; i++){
+			$result.html($html+"&#9898; ");
+			$html = $result.html();
+		};
 	};
-	for (var k = 0; i < wrong; k++){
-		$result.html($html+"&#8855;    ");
-		$html = $result.html();
+	if(wrong > 0){
+		for (var i = 0; i < wrong; i++){
+			$result.html($html+"&#8855;    ");
+			$html = $result.html();
+		};
 	};
 };
 
