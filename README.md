@@ -10,28 +10,29 @@ Find 'em!
   
   * N-Droid "Code": _Depending on the difficulty setting of the game, you'll have either a 4- or 5-droid "code" to break._
   
-  * Result Markers: _After submission of each guess: A BLACK peg will be displayed to represent each correct droid in the correct position, a WHITE peg will be displayed to represent each correct droid in the wrong position, and a CIRCLED X will be displayed to represent each incorrect droid._
+  * Result Markers: _After the submission of each guess - A BLACK peg will be displayed to represent each correct droid in the correct position, a WHITE peg will be displayed to represent each correct droid in the wrong position, and a CIRCLED X will be displayed to represent each incorrect droid._
 
 
-_**Yikes. Summary please?**_
+_**Hmm, ok. Summary please?**_
 
-Level | Code Length | Selectable Droids | Rounds
+Level | Code Length | Selectable Droids | Rounds (Guesses)
 --- | --- | --- | ---
-Easy |  4  |  4  |  8
+Easy |  4  |  5  |  8
 Medium |  4  |  6  |  10
 Hard |  5  |  8  |  12
 
 ### Functional Summary ###
 
 **Droids! Droids! Droids!**
-	* `droidsAll`: A collection of droid objects; Each droid is identified by a `droidKey` and has an associated `name` and `image` attribute.
-	* For each new game, a set of selectable droids is randomly picked from `droidsAll`. Subsequently, a random final "code" is generated from the set of selectable droids.
+* `droidsAll`: A collection of droid objects; Each droid is identified by a `droidKey` and has an associated `name` and `image` attribute.
+* For each new game, a set of selectable droids is randomly picked from `droidsAll`. Subsequently, a random final "code" is generated from the set of selectable droids.
 
 **Game Interface**
-	* `droid-home`: A fixed "menu" where the selectable droids would like to live happily ever after
-	* `play-area`: A column that stores each of the player's guesses and corresponding submission results
+* `droid-home`: A fixed "menu" where the selectable droids would like to live happily ever after
+* `play-area`: A column that stores each of the player's guesses and corresponding submission results
+* For each round, a droid can be dragged into the play area to forumlate a guess at the final code.
 
 **Other Things**
-	* Droids wiggle when they're scared.
-	* Special thanks to Ash for finding that gremlin, Rosie.
+* Droids wiggle when they're scared.
+* Special thanks to Ash for finding that gremlin, Rosie.
 
