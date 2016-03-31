@@ -45,4 +45,4 @@ Hard |  5  |  8  |  12
 
 **Other Things**
 * Droids wiggle when they're scared.
-* Special thanks to Ash for finding that gremlin, Rosie.
+* Special thanks to @ajhofferber for helping me turn .off() that gremlin, Rosie.
