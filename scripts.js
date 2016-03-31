@@ -44,8 +44,8 @@ droidSearch.parseDifficulty = function(level){
 	switch(level){
 		case 1: 
 			this.codeLength = 4;
-			this.numDroids = 4;
-			this.numRounds = 2;
+			this.numDroids = 5;
+			this.numRounds = 8;
 			break;
 		case 2: 
 			this.codeLength = 4;
@@ -93,7 +93,6 @@ droidSearch.validateGuess = function(playerGuess){
 	// Reset Round Result Summary (For now... [Correct, Nearly Correct, Wrong])
 	
 	var roundResult = [0,0,0];
-
 	// Check for droid presence && correct droid placement
 	for (i = 0; i < playerGuess.length; i++){		
 		if (playerGuess[i] == this.answer[i]){
@@ -166,16 +165,16 @@ droidSearch.printGuessResult = function(round,roundResult){
 	var $html = $result.html();
 	var correct = roundResult[0]; // Black pegs represent droids that are present && in the correct position
 	var reposition = roundResult[1];  // White pegs represent presence of correct droid that must be re-positioned
-	var wrong = this.codeLength - (correct + reposition); // Circles with Xs represent incorrect droids
+	var wrong = roundResult[2]; // Circles with Xs represent incorrect droids
 	for (var i = 0; i < correct; i++){
 		$result.html($html+"&#9899; ");
 		$html = $result.html();
 	};
-	for (var j = 0; i < reposition; i++){
+	for (var j = 0; i < reposition; j++){
 		$result.html($html+"&#9898; ");
 		$html = $result.html();
 	};
-	for (var k = 0; i < wrong; i++){
+	for (var k = 0; i < wrong; k++){
 		$result.html($html+"&#8855;    ");
 		$html = $result.html();
 	};
