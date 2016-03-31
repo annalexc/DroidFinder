@@ -24,10 +24,10 @@ As an Imperial Stormtrooper, your task (of paramount importance) is to find a se
   * **NOTE about Result Markers: The result markers do NOT correspond to the position of the droid in the guess submission, each peg only represents "the existence of" or "the absence of" a particular droid in a given guess**
 
 
-_**Hmmm, ok. Summary please?**_
+### _**Hmmm, ok. Summary please?**_ ###
 
 Level | Code Length | Selectable Droids | Rounds (Guesses)
---- | --- | --- | ---
+:---: | :---: | :---: | :---:
 Easy |  4  |  5  |  8
 Medium |  4  |  6  |  10
 Hard |  5  |  8  |  12
