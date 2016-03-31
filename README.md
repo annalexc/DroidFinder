@@ -16,11 +16,11 @@ As an Imperial Stormtrooper, your task (of paramount importance) is to find a se
 
 ![Let's play!](https://github.com/annalexc/DroidFinder/blob/gh-pages/screenshots/gameplay.png)
 
-  * Selectable Droids: _Orrr.. Subset of droids to choose from (but that was a mouthful). Depending on the difficulty setting of the game, you'll have 4 - 8 droids to include in your guesses._
+  * **Selectable Droids:** _Orrr.. A subset of droids to choose from when formulating a guess at the final "code" (but that was a mouthful). Depending on the difficulty setting of the game, you'll have 5 - 8 droids to include in your guesses._
   
-  * N-Droid "Code": _Depending on the difficulty setting of the game, you'll have either a 4- or 5-droid "code" to break._
+  * **N-Droid "Code":** _Depending on the difficulty setting of the game, you'll have either a 4- or 5-droid "code" to break._
   
-  * Result Markers: _After the submission of each guess - A BLACK peg will be displayed to represent each correct droid in the correct position, a WHITE peg will be displayed to represent each correct droid in the wrong position, and a CIRCLED X will be displayed to represent each incorrect droid._ 
+  * **Result Markers:** _After the submission of each guess - A BLACK peg will be displayed to represent each correct droid in the correct position, a WHITE peg will be displayed to represent each correct droid in the wrong position, and a CIRCLED X will be displayed to represent each incorrect droid._ 
   * **NOTE about Result Markers: The result markers do NOT correspond to the position of the droid in the guess submission, each peg only represents "the existence of" or "the absence of" a particular droid in a given guess**
 
 
