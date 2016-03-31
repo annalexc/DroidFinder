@@ -43,13 +43,14 @@ h2 {
   font-weight: 700;
   color: rgba(242,203,140,0.85);
   margin: 0 auto 30px;
+  text-shadow: 4px 4px 0px rgba(111,93,90,0.55),8px 8px 0px rgba(0, 0, 0, 0.25);
 }
 
 p {
   color: rgba(242,203,140,0.85);
   border-top: 2px solid rgba(242,203,140,0.55);
   border-bottom: 2px solid rgba(242,203,140,0.55);
-  margin: 50px auto 20px;
+  margin: 10px auto 40px;
   padding: 15px 0;
   width: 85%;
   font-size: 2.65em;
@@ -130,8 +131,10 @@ header {
   border: 5px solid snow;
 }
 
-
 #message {
+  background: url('img/welcome.png') no-repeat fixed;
+  background-size: contain;
+  background-position: center left;
   font-family: 'Quicksand';
   display: flex;
   flex-direction: column;
@@ -140,12 +143,13 @@ header {
   color: rgb(202,183,180);
   position: fixed;
   text-align: center;
-  background-color: rgba(0,0,0,0.85); 
+  background-color: rgba(0,0,0,0.91); 
   height: 100%;
   width: 100%;
   padding: 0 100px;
   top: 0;
   left: 0;
+  opacity: 1;
   z-index: 1000;
 }
 
@@ -271,29 +275,33 @@ FUN EFFECTS WITH SELECTABLE DROIDS
 
 
 fieldset {
-  font: 1.8em 'Quicksand';
+  font: 1.5em 'Quicksand';
   padding: 0 10px 10px;
-  width: 450px;
-  margin: 0 auto 30px;
-  border: 2px solid rgb(225,204,200);
-  border-radius: 2em;
+  width: 420px;
+  margin: 0 auto 50px;
+  border-right: none;
+  border-left: none;
+  border-top: 2px solid rgba(225,204,200,0.8); 
+  border-bottom: 2px solid rgba(225,204,200,0.8);
+  /*border-radius: 2em;*/
 }
 legend {
   font-family: 'Fredoka One';
   font-weight: 400;
   margin-bottom: -2px;
   text-align: center;
-  font-size: 1.25em;
+  font-size: 1.2em;
 }
 
 input[type='radio']{
-    margin: 11px;
+    margin: 14px;
+    display: inline;
+    vertical-align: baseline;
 }
 
-input[type='radio'], label{   
-   display: inline;
-   vertical-align: top;
-}
+/*label{
+  height: 100%;
+}*/
 
 /**********************************
     FUN EFFECTS WITH BUTTONS
@@ -317,9 +325,9 @@ button {
 button#start-game {
   margin: 0 auto;
   background-color: rgba(255,255,255,0.2);
-  width: 450px;
+  width: 420px;
   border: 6px solid rgb(225,204,200);
-  border-radius: 0.25em;
+  border-radius: 2em;
   cursor: pointer;
   padding: 10px;
   color: rgb(225,204,200);
@@ -345,6 +353,6 @@ button:active, button#start-game:active {
 
 .emphasis {
   font-weight: normal;
-  font: 1.20em 'Fredoka One';
+  font: 1.25em 'Fredoka One';
   text-shadow: 4px 4px 0px rgba(111,93,90,0.55),8px 8px 0px rgba(0, 0, 0, 0.25);
 }

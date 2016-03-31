@@ -223,8 +223,12 @@ droidSearch.checkDisplayWinStatus = function(roundResult,message){
 	if(roundResult[0] == this.codeLength) {
 		$('h2').remove(); //Remove any h2s that may have been created from previous games
 		message.prepend('<h2>');
+		message.css({
+			'background-image' :'url("img/welcome.png")',
+			'background-position' : 'center left'
+		});
 		message.show();
-		$('h2').text('YOU WIN!');
+		$('h2').text('Indeed these ARE the droids!');
 		return true;
 	};
 };
@@ -236,8 +240,12 @@ droidSearch.checkDisplayLoseStatus = function(round, roundResult, message){
 	if((round == this.numRounds) && !(roundResult[0] == this.codeLength)) {
 		$('h2').remove(); //Remove any h2s that may have been created from previous games
 		message.prepend('<h2>');
+		message.css({
+			'background-image' :'url("img/obiwan.png")',
+			'background-position' : 'center right'
+		});
 		message.fadeIn();
-		$('h2').text(":( Sorry, these are NOT the droids you're looking for...");
+		$('h2').text("No, these are not the droids...");
 		return true;
 	};
 };
@@ -324,7 +332,7 @@ droidSearch.startGameHandler = function(welcome,droidHome,message,landing){
 
 	// Create Difficulty Level Radio Buttons!
 	var $levels = $('<fieldset data-role="controlgroup"></fieldset>').prepend(
-		$('<legend>Choose a Level</legend>'),
+		$('<legend> Choose a Level </legend>'),
 		// Easy Level Radio Button
 		$('<input />')
 			.attr({'type':'radio','name': 'level','id': 'easy','value': 'easy'
