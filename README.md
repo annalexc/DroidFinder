@@ -15,14 +15,15 @@ As an Imperial Stormtrooper, your task (of paramount importance) is to find a se
 
 
 ### Gameplay Componentry ###
-  * Selectable Droids: _Depending on the difficulty setting of the game, you'll have 4 - 8 droids to include in your guesses._
+  * Selectable Droids: _Orrr.. Subset of droids to choose from (but that was a mouthful). Depending on the difficulty setting of the game, you'll have 4 - 8 droids to include in your guesses._
   
   * N-Droid "Code": _Depending on the difficulty setting of the game, you'll have either a 4- or 5-droid "code" to break._
   
-  * Result Markers: _After the submission of each guess - A BLACK peg will be displayed to represent each correct droid in the correct position, a WHITE peg will be displayed to represent each correct droid in the wrong position, and a CIRCLED X will be displayed to represent each incorrect droid._
+  * Result Markers: _After the submission of each guess - A BLACK peg will be displayed to represent each correct droid in the correct position, a WHITE peg will be displayed to represent each correct droid in the wrong position, and a CIRCLED X will be displayed to represent each incorrect droid._ 
+  * **NOTE about Result Markers: The result markers do NOT correspond to the position of the droid in the guess submission, each peg only represents "the existence of" or "the absence of" a particular droid in a given guess**
 
 
-_**Hmm, ok. Summary please?**_
+_**Hmmm, ok. Summary please?**_
 
 Level | Code Length | Selectable Droids | Rounds (Guesses)
 --- | --- | --- | ---
@@ -39,7 +40,7 @@ Hard |  5  |  8  |  12
 **Game Interface**
 * `droid-home`: A fixed "menu" where the selectable droids would like to live happily ever after
 * `play-area`: A column that stores each of the player's guesses and corresponding submission results
-* For each round, a droid can be dragged into the play area to forumlate a guess at the final code.
+* For each round, a droid can be **dragged and dropped** into the play area to forumlate a guess at the final code.
 
 **Other Things**
 * Droids wiggle when they're scared.
