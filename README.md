@@ -5,6 +5,10 @@ Find 'em!
 ### Droid Finder (aka 'Mastermind')
 * As an Imperial Stormtrooper, your task (of paramount importance) is to find a set of unique droids somewhere in the galaxy. These droids must also be presented to your Sith authority in a specific order. You'll have a few chances to guess the right droids, and to determine their unique order. Thankfully, you'll also have a few hints that aren't subject to Jedi obfuscation.
 
+**Wireframes**
+
+![Wireframe for welcome and play area](https://github.com/annalexc/DroidFinder/blob/gh-pages/screenshots/wireframes.png)
+
 
 ### Gameplay Componentry ###
   * Selectable Droids: _Depending on the difficulty setting of the game, you'll have 4 - 8 droids to include in your guesses._
