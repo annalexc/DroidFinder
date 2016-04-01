@@ -211,7 +211,10 @@ droidSearch.displayNextRound = function(round){
 		$currentRound.addClass('inactive');
 		$currentRound.children().addClass('inactive');
 		$currentRound.children().off();
-		$nextRound.fadeIn().css('display','flex');
+		$nextRound.fadeIn().css({
+			'display'	: '-webkit-flex',
+			'display'	: 'flex' 
+		});
 		$nextRound.toggleClass('hidden').addClass('active');
 
 	};
