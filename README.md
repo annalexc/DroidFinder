@@ -3,7 +3,7 @@
 **Find 'em [HERE](annalexc.github.io/DroidFinder)!**
 
 ## Are these the droids you're looking for?
-As an Imperial Stormtrooper, your task (of paramount importance) is to find a set of unique droids somewhere in the galaxy. These droids must also be presented to your Sith authority in a specific order. You'll have a few chances to guess the right droids, and to determine their unique order. Thankfully, you'll also have a few hints that aren't subject to Jedi obfuscation.
+As an Imperial Stormtrooper, your task (of paramount importance) is to find a set of unique droids somewhere in the galaxy. These droids must also be presented to your Sith authority in a specific order. You'll have only a few chances to guess the correct droid "code", and to determine their unique order. Thankfully, you'll also be given hints that aren't subject to Jedi obfuscation.
 
 _**Welcome Screen**_
 
