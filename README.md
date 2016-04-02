@@ -10,11 +10,13 @@ _**Welcome Screen**_
 ![Welcome Imperial Mastermind!](https://github.com/annalexc/DroidFinder/blob/gh-pages/screenshots/homepage.png)
 
 
-**Wireframes**
+_**Wireframes**_
 
 ![Wireframe for welcome and play area](https://github.com/annalexc/DroidFinder/blob/gh-pages/screenshots/wireframes.png)
 
 ### Gameplay Componentry ###
+
+_**Play Area** - Selectable droids along the top, "guess area" immediately below_
 
 ![Let's play!](https://github.com/annalexc/DroidFinder/blob/gh-pages/screenshots/gameplay.png)
 
