@@ -377,7 +377,7 @@ button:active, button#start-game:active {
 
     h1 {
       margin: 5px auto 11px;
-      width: 400px;
+      width: 90%;
       color: white;
       font-size: 3.1rem;
       text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
@@ -397,6 +397,7 @@ button:active, button#start-game:active {
 
     #droid-home {
       flex-wrap: wrap;
+      justify-content: space-between;
       height: 95px;
       width: 90%;
       border-top: 2px solid rgb(123,109,106);
@@ -429,9 +430,9 @@ button:active, button#start-game:active {
     .droid {
       display: inline-block;
       vertical-align: middle;
-      width: 44px;
-      height: 44px;
-      margin: 0 0.5px 6px;
+      width: 42px;
+      height: 42px;
+      margin: 0 -0.15px 6px;
       border-radius: 50%;
       border: 2px solid snow;
     }
