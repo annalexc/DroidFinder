@@ -228,7 +228,8 @@ droidSearch.checkDisplayWinStatus = function(roundResult,message){
 		message.prepend('<h2>');
 		message.css({
 			'background-image' :'url("img/welcome.png")',
-			'background-position' : 'center left'
+			'background-size'  : 'contain',
+			'background-position' : 'bottom left'
 		});
 		message.show();
 		$('h2').text('Indeed these ARE the droids!');
@@ -245,7 +246,8 @@ droidSearch.checkDisplayLoseStatus = function(round, roundResult, message){
 		message.prepend('<h2>');
 		message.css({
 			'background-image' :'url("img/obiwan.png")',
-			'background-position' : 'center right'
+			'background-size'  : 'contain',
+			'background-position' : 'bottom right'
 		});
 		message.fadeIn();
 		$('h2').text("No, these are not the droids...");
