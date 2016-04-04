@@ -1,18 +1,22 @@
-## Are these the droids you're looking for?
+# Droid Finder (aka 'Mastermind')
 
 **Find 'em [HERE](annalexc.github.io/DroidFinder)!**
 
-### Droid Finder (aka 'Mastermind')
-As an Imperial Stormtrooper, your task (of paramount importance) is to find a set of unique droids somewhere in the galaxy. These droids must also be presented to your Sith authority in a specific order. You'll have a few chances to guess the right droids, and to determine their unique order. Thankfully, you'll also have a few hints that aren't subject to Jedi obfuscation.
+## Are these the droids you're looking for?
+As an Imperial Stormtrooper, your task (of paramount importance) is to find a set of unique droids somewhere in the galaxy. These droids must also be presented to your Sith authority in a specific order. You'll have only a few chances to guess the correct droid "code", and to determine their unique order. Thankfully, you'll also be given hints that aren't subject to Jedi obfuscation.
+
+_**Welcome Screen**_
 
 ![Welcome Imperial Mastermind!](https://github.com/annalexc/DroidFinder/blob/gh-pages/screenshots/homepage.png)
 
 
-**Wireframes**
+_**Wireframes**_
 
 ![Wireframe for welcome and play area](https://github.com/annalexc/DroidFinder/blob/gh-pages/screenshots/wireframes.png)
 
 ### Gameplay Componentry ###
+
+_**Play Area** - Selectable droids along the top, "guess area" immediately below_
 
 ![Let's play!](https://github.com/annalexc/DroidFinder/blob/gh-pages/screenshots/gameplay.png)
 
