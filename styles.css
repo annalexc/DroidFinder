@@ -6,7 +6,8 @@
 IMPORTANT DEFAULTS
 ***********************************/
 
-html>body { 
+
+body { 
   box-sizing: border-box;
   height: 100%;
   min-height: 100%;
@@ -14,16 +15,25 @@ html>body {
   margin: 0 auto;
   padding: 0;
   background-color: rgb(204,174,166);
-  font-size: 16px;
-  font-family: 'Arvo';
+  font: 16px 'Arvo';
 }
 
 *, *::before, *::after { box-sizing: inherit; }
 
-body,header {  
-  background: url("img/tatooinebg1.png") no-repeat fixed;
+body, header {  
+  background: url("img/tatooinebg1.png") no-repeat center top fixed;
   background-size: cover;
-  background-position: center top;
+}
+header {
+  position: fixed;
+  display: flex;
+  display: -webkit-flex; 
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 308px;
+  text-align: center;
+  z-index: 11;
 }
 
 h1 {
@@ -31,7 +41,7 @@ h1 {
   font-weight: 400;
   line-height: 0.9em;
   padding: 0;
-  width: 1000px;
+  width: 790px;
   margin: 5px auto 12px;
   color: white;
   font-size: 5em;
@@ -51,22 +61,16 @@ p {
   border-top: 2px solid rgba(242,203,140,0.55);
   border-bottom: 2px solid rgba(242,203,140,0.55);
   margin: 10px auto 40px;
-  padding: 15px 0;
-  width: 85%;
-  font-size: 2.65em;
+  padding: 13px 0;
+  width: 95%;
+  font-size: 2.6em;
 }
 
-header {
-  position: fixed;
-  display: flex;
-  display: -webkit-flex; 
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 308px;
-  text-align: center;
-  z-index: 11;
-}
+
+
+/**********************************
+WHERE THE DROIDS WILL LIVE
+***********************************/
 
 #droid-home {
   font-family: 'Quicksand';
@@ -76,7 +80,7 @@ header {
   align-items: flex-end;
   position: relative;
   margin: 0 auto;
-  width: 780px; 
+  width: 790px; 
   height: 132px; 
   background-color: rgb(155,134,129);
   border-top: 2px solid rgb(123,109,106);
@@ -85,14 +89,12 @@ header {
   z-index: 11;
 }
 
-/*\26AB \26AA \2297*/
 
 #droid-home::before {
   content: 'Drag a droid to one of the empty guess slots.';
   position: absolute;
   font-size: 1.2em;
   font-weight: 700;
-  /*color: rgba(93,80,77,1);*/
   color: rgba(255,255,255,0.65);
   left: 185px;
   top: 0;
@@ -136,7 +138,7 @@ header {
 #message {
   background: url('img/welcome.png') no-repeat fixed;
   background-size: contain;
-  background-position: center left;
+  background-position: bottom left;
   font-family: 'Quicksand';
   display: flex;
   display: -webkit-flex;
@@ -149,7 +151,7 @@ header {
   background-color: rgba(0,0,0,0.91); 
   height: 100%;
   width: 100%;
-  padding: 0 100px;
+  padding: 0 60px;
   top: 0;
   left: 0;
   opacity: 1;
@@ -308,9 +310,6 @@ input[type='radio']{
     vertical-align: baseline;
 }
 
-/*label{
-  height: 100%;
-}*/
 
 /**********************************
     FUN EFFECTS WITH BUTTONS
@@ -344,7 +343,7 @@ button#start-game {
 }
 
 button:hover, button#start-game:hover {
-  background-color: rgba(124,104,100,0.85);
+  background-color: rgba(124,104,100,0.9);
 }
 
 button:active, button#start-game:active {
@@ -365,3 +364,200 @@ button:active, button#start-game:active {
   font: 1.25em 'Fredoka One';
   text-shadow: 4px 4px 0px rgba(111,93,90,0.55),8px 8px 0px rgba(0, 0, 0, 0.25);
 }
+
+
+/**********************************
+           MEDIA QUERIES
+***********************************/
+
+@media all and (max-width: 630px) {
+    body { min-width: 150px;}
+    
+    header { width: 100%; height: 260px; }
+
+    h1 {
+      margin: 5px auto 11px;
+      width: 400px;
+      color: white;
+      font-size: 3.1rem;
+      text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      font-size: 3rem;
+      margin: 0 auto 8px;
+    }
+
+    p {
+      margin: 0px auto 20px;
+      padding: 10px 0;
+      width: 95%;
+      font-size: 1.55rem;
+    }
+
+    #droid-home {
+      flex-wrap: wrap;
+      height: 95px;
+      width: 90%;
+      border-top: 2px solid rgb(123,109,106);
+      padding: 0.35em 0 0.75em;
+      border-radius: 50% / 12.75%;
+      z-index: 11;
+    }
+
+    #droid-home::before {
+      content: 'Drag a droid to an empty guess slot.';
+      position: absolute;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      left: 0;
+      top: 4px;
+    }
+
+
+    #droid-home::after {
+      font-size: 1.1rem;
+      line-height: 1.05;
+      color: rgba(0,0,0,0.75);
+      content: '\A\A\A\A\A\26AB : right droid, right position\A\26AA : right droid, wrong position\A\2297 : wrong droid';
+      position: absolute;
+      box-shadow: 0px 15px 0 rgb(123,109,106);
+    }  
+
+    .droid {
+      display: inline-block;
+      vertical-align: middle;
+      width: 44px;
+      height: 44px;
+      margin: 0 0.5px 6px;
+      border-radius: 50%;
+      border: 2px solid snow;
+    }
+
+    #message {
+      background-size: cover;
+      background-position: bottom center;
+      height: 100%;
+      width: 100%;
+      padding: 0 8px;
+    }
+
+    #landing {
+      width: 98%;
+      top: 320px;
+    }
+
+    .code {
+      min-height: 80px;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 6%;    
+    }
+    .code.active {
+      min-height: 80px;
+      height: 6%;   
+    }
+
+    .round {
+      color: rgba(124,104,100,0.75);
+      text-shadow: 1px 1.5px 1.5px rgba(255,255,255,0.5);
+      font-size: 2.25rem;
+      text-align: right;
+      width: 8%;
+      padding: 0 0 0 2px;
+      position: relative;
+      top: 27%;
+    }
+
+    .round::before {
+      display: none;
+    
+    }
+
+    .element {
+      display: inline-block;
+      vertical-align: middle;
+      width: 13%;
+      padding-bottom: 13%;
+      background-color: rgba(144,121,116,0.4);
+      box-shadow: 1.75px 1.75px 1.75px rgba(255,255,255,0.3);
+      border-radius: 50%;
+    }
+
+    .result {
+      flex-wrap: wrap;
+      line-height: 0.99;
+      justify-content: flex-start;
+      align-items: center;
+      vertical-align: middle;
+      width: 21.5%;
+      color: rgb(237,224,222);
+      height: 100%;
+      padding: 0;
+      font-size: 1.65rem;
+    }
+
+    fieldset {
+      display: flex;
+      flex-direction: column;
+      align-content: space-between;
+      font: 1.45rem 'Quicksand';
+      padding: 0 5px 5px;
+      width: 100%;
+      margin: 0 auto 15px;
+      border: 0;
+    }
+
+    legend {
+      text-align: center;
+      font-size: 1.6rem;
+    }
+
+    input[type='radio'] {
+      display: none;
+    }
+    label{
+      display: flex;
+      align-items: center;
+      position: relative;
+      left: 35%;
+      margin: 3px auto;
+    }
+
+    input[type='radio']:checked+label::before {
+      background-color: rgba(124,104,100,0.85)
+    }
+
+    label::before {
+      content: '';
+      display: inline-block;
+      border: 2px solid rgb(225,204,200);
+      border-radius: 50%;
+      margin: 3px 0.38em;
+      width: 25px;
+      height: 25px;
+    }
+
+    button {
+      width: 90%;
+      line-height: 0.8;
+      display: inline-block;
+      color: white;
+      font: 0.90rem 'Arvo';
+      padding: 2px;
+      line-height: 1.12;
+    }
+
+    button#start-game {
+      width: 70%;
+      border: 3px solid rgb(225,204,200);
+      border-radius: 2em;
+      padding: 5px;
+      font-size: 1.85rem;
+    }
+
+}
+

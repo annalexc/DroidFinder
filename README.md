@@ -16,7 +16,7 @@ As an Imperial Stormtrooper, your task (of paramount importance) is to find a se
 
 ![Let's play!](https://github.com/annalexc/DroidFinder/blob/gh-pages/screenshots/gameplay.png)
 
-  * **Selectable Droids:** _Orrr.. A subset of droids to choose from when formulating a guess at the final "code" (but that was a mouthful). Depending on the difficulty setting of the game, you'll have 5 - 8 droids to include in your guesses._
+  * **Selectable Droids:** _A subset of droids to choose from when formulating a guess at the final "code". Depending on the difficulty setting of the game, you'll have 5 - 8 droids to include in your guesses._
   
   * **N-Droid "Code":** _Depending on the difficulty setting of the game, you'll have either a 4- or 5-droid "code" to break._
   
@@ -36,7 +36,7 @@ Hard |  5  |  8  |  12
 
 **Droids! Droids! Droids!**
 * `droidsAll`: A collection of droid objects; Each droid is identified by a `droidKey` and has an associated `name` and `image` attribute.
-* For each new game, a set of selectable droids is randomly picked from `droidsAll`. Subsequently, a random final "code" is generated from the set of selectable droids.
+* `selectableDroids`: For each new game, a set of selectable droids is randomly picked from `droidsAll`. Subsequently, a random final "code" is generated from the set of selectable droids.
 
 **Game Interface**
 * `droid-home`: A fixed "menu" where the selectable droids would like to live happily ever after
